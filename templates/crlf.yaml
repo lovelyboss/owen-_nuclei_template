@@ -1,0 +1,28 @@
+id: CRLF_Injection
+
+info:
+  name: Carriage Return Line Feed (CRLF)
+  author: lovelyboss
+  severity: high
+  description: redirect,Host-Header-Injection,Cookie-Injecton.
+ 
+requests:
+  - method: GET
+    path:
+      - '{{BaseURL}}/%0d%0aSet-Cookie:%20csrf_id=injection%3b'
+
+    
+
+    
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+          
+
+      - type: word
+        part: body
+        words:
+          - "csrf_id=injection"
+# Created by lovelyboss on 22/02/2023
